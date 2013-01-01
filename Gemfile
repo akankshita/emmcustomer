@@ -49,3 +49,4 @@ gem 'will_paginate-bootstrap'
 #test not neded for this 
 #gem 'nokogiri'
 #gem 'Ox'
+gem 'libv8', '~> 3.11.8'
