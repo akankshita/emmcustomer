@@ -1,0 +1,172 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span10">
+         <!--div class="page-header">
+        <h2>Add Customer</h2>
+        </div-->
+        <ul class="breadcrumb">
+        <li><a href="#">Home</a> <span class="divider">/</span></li>
+        <li class="active">Add Customer</li>
+        </ul>
+        <!--div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">?</button>
+        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div-->
+        
+        <%= form_for(@customer,:html=>{:class=>"form-horizontal"}) do |f| %>
+        <% if @customer.errors.any? %>
+          <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong><%=@customer.errors.full_messages[0] %></strong>
+          </div>
+        <% end %>
+        <div class="span5 well">
+          <!--form class="form-horizontal"-->
+        <h4>General Information</h4>
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Customer ID</label>
+          <div class="controls">
+            <%= f.text_field :customer_id,:class=>"span8",:placeholder=>"Customer ID"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Licence ID</label>
+          <div class="controls">
+            <%= f.text_field :licence_id,:class=>"span8",:placeholder=>"Licence ID"%>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :name ,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.text_field :name,:class=>"span8",:placeholder=>"Name"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :email,:class=>"control-label"%>
+            <div class="controls">
+              <%= f.text_field :email,:class=>"span8",:placeholder=>"Email"%>
+            </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :city,:class=>"control-label"%>
+            <div class="controls">
+              <%= f.text_field :city,:class=>"span8",:placeholder=>"City"%>
+            </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :country ,:class=>"control-label"%>
+            <div class="controls">
+              <%= select_tag(:country, options_for_select(['US','Canada'],{ :selected => @customer.country } ),{:class=>"span8"}) %>
+            <!--select class="span8" name="country">
+                <option value="US">US</option>
+                <option value="Canada">Canada</option>
+              </select-->
+            </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :postalcode,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.text_field :postalcode,:class=>"span8",:placeholder=>"Postal Code"%>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :phone ,:class=>"control-label"%>
+          <div class="controls">
+              <%= f.text_field :phone_code,:class=>"input-mini",:placeholder=>"Phone"%>
+              <%= f.text_field :phone,:class=>"span8",:placeholder=>"Phone"%>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <%= f.label :status ,:class=>"control-label"%>
+            <div class="controls">
+              <%= select_tag(:status, options_for_select(['Active','Inactive'],{ :selected => @customer.status } ),{:class=>"span4"}) %>
+            <!--select class="span4" name="customer[status]">
+                <option>Active</option>
+                <option>Inactive</option>
+              </select--><br><br>
+                 <button type="submit" class="btn">Submit</button>
+            </div>
+        
+        </div>
+        
+        
+        
+        <!--/form-->
+        </div>
+        <div class="span5 well">
+            <form class="form-horizontal">
+        <h4>Server Information</h4>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Heroku</label>
+            <div class="controls">
+              <%= f.text_field :heroku_url,:class=>"span8",:placeholder=>"Application URL"%>
+            </div>
+            </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Username</label>
+            <div class="controls">
+              <%= f.text_field :heroku_username,:class=>"span8",:placeholder=>"Username"%>
+            </div>
+            </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Password</label>
+            <div class="controls">
+              <%= f.password_field :heroku_password,:class=>"span8",:placeholder=>"Password"%>
+            </div>
+            </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">GitURL</label>
+            <div class="controls">
+              <%= f.text_field :git_url,:class=>"span8",:placeholder=>"Git URL"%>
+            </div>
+            </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">CSV Storage</label>
+            <div class="controls">
+              <%= f.text_field :amazon_url,:class=>"span8",:placeholder=>"Amzon S3 URL"%>
+            </div>
+            </div>
+        <!--/form-->
+        </div>
+      <%end%>
+    </div>
+    </div>	
+</div><!--/.fluid-container-->
+
+
+
+
+
+<!--
+<%#= form_for(@post) do |f| %>
+  <%# if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%#= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <%# @post.errors.full_messages.each do |msg| %>
+        <li><%#= msg %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
+
+  <div class="field">
+    <%#= f.label :name %><br />
+    <%#= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%#= f.label :title %><br />
+    <%#= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%#= f.label :content %><br />
+    <%#= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%#= f.submit %>
+  </div>
+<%# end %>
+-->

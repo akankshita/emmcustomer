@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+  <div class="span10">
+      <!--div class="page-header">
+      <h2>Administrators</h2>
+      </div-->
+      <ul class="breadcrumb">
+      <li><a href="#">Home</a> <span class="divider">/</span></li>
+      <%if @admin.id.nil?%>
+        <li class="active">Add Administrator</li>
+      <%else%>
+        <li class="active">Edit Administrator</li>
+      <%end%>
+      </ul>
+
+      <%= form_for(@admin,:html=>{:class=>"form-horizontal"}) do |f| %>
+        <% if @admin.errors.any? %>
+          <div id="error_explanation">
+          <!--h2><%#= pluralize(@admin.errors.count, "error") %> prohibited this post from being saved:</h2-->
+            <div class="alert alert-error">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <strong><%=@admin.errors.full_messages[0] %></strong>
+            </div>
+         </div>
+      <% end %>
+      <div class="control-group">
+        <%= f.label :first_name ,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.text_field :first_name,:class=>"span3",:placeholder=>"First Name"%>
+          </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :last_name,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.text_field :last_name,:class=>"span3",:placeholder=>"Last Name"%>
+          </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :email,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.text_field :email,:class=>"span3",:placeholder=>"Email"%>
+          </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :password,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.password_field:password,:class=>"span3",:placeholder=>"Password"%>
+          </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :status,:class=>"control-label"%>
+          <div class="controls">
+            <%= f.select :status, [['Active','active'],['Inactive','inactive']] %>
+            <br><br>
+               <%= f.submit%>
+          </div>
+      </div>
+      <%end%>
+  </div>
+  </div>
+</div><!--/.fluid-container-->
+
+
+
+
+<!--
+<%#= form_for(@post) do |f| %>
+  <%# if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%#= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <%# @post.errors.full_messages.each do |msg| %>
+        <li><%#= msg %></li>
+      <%# end %>
+      </ul>
+    </div>
+  <%# end %>
+
+  <div class="field">
+    <%#= f.label :name %><br />
+    <%#= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%#= f.label :title %><br />
+    <%#= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%#= f.label :content %><br />
+    <%#= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%#= f.submit %>
+  </div>
+<%# end %>
+-->

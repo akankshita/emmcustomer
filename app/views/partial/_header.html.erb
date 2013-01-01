@@ -1,0 +1,21 @@
+<div class="navbar">
+<div class="navbar-inner">
+    <a class="brand" href="#">eMMSystem</a>
+    <ul class="nav">
+           <li><%= link_to "Home","/dashboard" %></li>
+        <li class="divider-vertical"></li>
+        <li><%= link_to "Administrators","/admins" %></li>
+        <li class="divider-vertical"></li>
+        <li><%= link_to "Login Logs","/loginlogs" %></li>
+        <li class="divider-vertical"></li>
+        <li><%= link_to "Customers","/customers" %></li>
+        <li class="divider-vertical"></li>
+        <li><%= link_to "Meter Readings","/electricities" %></li>
+        <li class="divider-vertical"></li>
+        <!--li><%#= link_to "Settings","/setting" %></li-->
+        <%if !session[:login_id].nil?%>
+            <li><%= link_to "Sign Out","/signout" %></li>
+        <%end%>
+    </ul>
+</div>
+</div>

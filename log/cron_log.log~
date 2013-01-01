@@ -1,0 +1,12 @@
+/var/www/rails_app/emm-phase2/config/boot.rb:1:in `require': no such file to load -- rubygems (LoadError)
+	from /var/www/rails_app/emm-phase2/config/boot.rb:1
+	from script/rails:5:in `require'
+	from script/rails:5
+/var/www/rails_app/emm-phase2/config/boot.rb:1:in `require': no such file to load -- rubygems (LoadError)
+	from /var/www/rails_app/emm-phase2/config/boot.rb:1
+	from script/rails:5:in `require'
+	from script/rails:5
+/var/www/rails_app/emm-phase2/config/boot.rb:1:in `require': no such file to load -- rubygems (LoadError)
+	from /var/www/rails_app/emm-phase2/config/boot.rb:1
+	from script/rails:5:in `require'
+	from script/rails:5

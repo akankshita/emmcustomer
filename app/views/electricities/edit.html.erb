@@ -1,0 +1,74 @@
+    <div class="container-fluid">
+	    <div class="row-fluid">
+		<div class="span10">
+		    <div class="page-header">
+			<h2>Meter Reading</h2>
+		    </div>
+		    <ul class="breadcrumb">
+			<li><a href="#">Home</a> <span class="divider">/</span></li>
+			<li class="active">Meter Reading</li>
+		    </ul>
+		    <form class="form-search" action="/electricities" method="put">
+			<!--<input type="text" class="input-large search-query">-->
+			From <input type="text" class="span2" value="2012-12-26" id="dp1" name="from">
+			To <input type="text" class="span2" value="2012-12-27" id="dp2" name="to">
+			<select class="span2">
+				    <option>Select Customer</option>
+				    <option>Active</option>
+				    <option>Inactive</option>
+				  </select>
+			<button type="submit" class="btn btn-primary">Search</button>
+			<div class="pull-right">
+			</div>
+		    </form>
+			<%if @electricities.length > 0%>
+		    <table class="table table-bordered table-striped">
+		    <thead>
+			<tr>
+			    <th><input type="checkbox"></th>
+			    <th>Meter IP</th>
+			    <th>Start Time </th>
+			    <th>End Time </th>
+			    <th>KWH equivalents</th>
+			</tr>
+		    </thead>
+		    <tbody>
+              
+              <% @electricities.each do |electricity| %>
+                <thead>
+                <tr>
+                <td><input type="checkbox" id="iId" value="<%=electricity.id%>" name="chk[]" ></td>
+                <td><%=electricity.meter_ip%></td>
+                <td><%=electricity.start_time.strftime("%dth %b %Y  %H:%M %p")%></td>
+                
+                <td><%= electricity.end_time.strftime("%dth %b %Y  %H:%M %p") %></td>
+                <td><%= electricity.kwh%></td>
+              </tr>
+              </thead>
+              <% end %>
+              </tbody>
+		    </table>
+              <%else%>
+		    <table class="table table-bordered table-striped">
+		    <thead>
+			<tr>
+			    <th><input type="checkbox"></th>
+			    <th>Meter IP</th>
+			    <th>Start Time </th>
+			    <th>End Time </th>
+			    <th>KWH equivalents</th>
+			</tr>
+		    </thead>
+			</table>
+				<div class="alert alert-warning">
+				  <button type="button" class="close" data-dismiss="alert">x</button>
+				  <strong>No Electricity Record Found</strong>
+				</div>
+              <%end%>
+			   <%= will_paginate @electricities , :renderer => BootstrapPagination::Rails%>
+		</div>
+	    </div>
+    </div><!--/.fluid-container-->
+<script>
+    $('#dp1,#dp2').datepicker({format: 'yyyy-mm-dd'})
+</script>

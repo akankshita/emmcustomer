@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+    <div class="span10">
+        <div class="page-header">
+        <h2>Login Logs</h2>
+        </div>
+        <ul class="breadcrumb">
+        <li><a href="#">Home</a> <span class="divider">/</span></li>
+        <li class="active">Login Logs</li>
+        </ul>
+      <% if flash[:msg]%>
+        <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <strong>Well done!</strong><%=flash[:msg]%>
+        </div>
+      <%end%>
+      <div class="left_topform">
+      <form class="form-search" action="/loginlog" name="sfrm" id="sfrm" method="put">
+        <%=text_field_tag 'keyword',params[:keyword],:class => 'input-large search-query'%>
+        <%=select_tag 'option', options_for_select([["Select Field",""],["Name","name"], ["Email","email"],["Status","status"]], params[:option])%>
+
+      <button type="submit" class="btn btn-primary">Search</button>
+    
+      </form>
+        </div>
+        <form class="form-search" action="/loginlog/action" name="cfrm" id="cfrm" method="put">
+        <input type="hidden" name="action_val" id ="action_val" value="">
+        <div class="pull-right">
+        <button type="submit" class="btn btn-inverse" onclick="return Action(document.cfrm,'delete');">Delete</button>
+        </div>
+         <div class="clearfix"></div>
+      
+         <%if @loginlogs.length > 0%>
+        <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th><input type="checkbox" onclick="checkAll(document.cfrm);" name="check_all" id="check_all"></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Login Time</th>
+            <th>Logout Time</th>
+            <th>IP</th>
+        </tr>
+        </thead>
+        <tbody>
+           
+            <% @loginlogs.each do |loginlogs| %>
+              <thead>
+              <tr>
+              <td><input type="checkbox" id="iId" value="<%=loginlogs.id%>" name="chk[]" ></td>
+              <td><%= link_to loginlogs.name%></td>
+              
+              <td><%= loginlogs.email %></td>
+              <td><%= loginlogs.login_time.strftime("%dth %b %Y  %H:%M %p") %></td>
+              <td><%if loginlogs.logout_time.nil?%><%= loginlogs.logout_time%><%else%><%= loginlogs.logout_time.strftime("%dth %b %Y  %H:%M %p") %><%end%></td>
+              <td><%= loginlogs.ip %></td>
+            </tr>
+            </thead>
+          <% end %>
+
+        </tbody>
+        </table>
+        <%else%>
+        <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th><input type="checkbox" onclick="checkAll(document.cfrm);" name="check_all" id="check_all"></th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Login Time</th>
+            <th>Logout Time</th>
+            <th>IP</th>
+        </tr>
+        </thead>
+        </table>
+            <div class="alert alert-warning">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <strong>No LoginLogs Found</strong>
+            </div>  
+        <%end%>
+        <%= will_paginate @login_infos, :renderer => BootstrapPagination::Rails %>
+           </form>
+    </div>
+   
+    </div>
+</div><!--/.fluid-container-->
