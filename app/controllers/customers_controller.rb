@@ -120,23 +120,24 @@ class CustomersController < ApplicationController
   end
   def action
     @ids = params[:chk]
+    clength = @ids.length
    # render :text => params.inspect and return false
     if params[:action_val] == "active"
      # render :text => params.inspect and return false
       Customer.update_all(["status = ? ", 'active'],["id IN (?)", @ids])
-      flash[:msg] = "Records Active sucessfully."
+      flash[:msg] = "#{clength} Record(s) Active sucessfully."
     end
     if params[:action_val] == "inactive"
       #render :text => 'inactive' and return false
       Customer.update_all(["status = ? ", 'inactive'],["id IN (?)", @ids] )
-      flash[:msg] = "Records InActive sucessfully."
+      flash[:msg] = "#{clength} Record(s) InActive sucessfully."
     end
     if params[:action_val] == "delete"
      @cusomers =  Customer.find(:all, :conditions => ["id in (?)", @ids])
      @customers.each do |cusotmer|
        cusotmer.destroy
      end
-     flash[:msg] = "Records Delete sucessfully."
+     flash[:msg] = "#{clength} Record(s) Delete sucessfully."
     end
     redirect_to :controller => 'customers', :action => 'index'
     #format.html { redirect_to :controller => 'customers', :action => 'index' }

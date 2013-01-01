@@ -39,14 +39,14 @@ class LoginlogsController < ApplicationController
   def action
     
     @ids = params[:chk]
-    
+    llength = @ids.length
     if params[:action_val] == "delete"
      @loginlogs =  Loginlog.find(:all, :conditions => ["id in (?)", @ids])
     # render :text => @loginlogs.inspect and return false
      @loginlogs.each do |loginlogs|
        loginlogs.destroy
      end
-     flash[:msg] = "Records Delete sucessfully."
+     flash[:msg] = "#{llength} Record(s) Delete sucessfully."
     end
     redirect_to :controller => 'loginlogs', :action => 'index'
     #format.html { redirect_to :controller => 'customers', :action => 'index' }

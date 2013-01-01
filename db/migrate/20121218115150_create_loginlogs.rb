@@ -1,7 +1,8 @@
 class CreateLoginlogs < ActiveRecord::Migration
   def change
     create_table :loginlogs do |t|
-      t.string :name
+      t.string :first_name
+      t.string :last_name
       t.string :email
       t.datetime :login_time
       t.datetime :logout_time

@@ -41,6 +41,7 @@ class AdminsController < ApplicationController
 
     @admins = Admin.all
     @admins = Admin.paginate(:page => params[:page], :per_page => 10 ,:conditions => keyword, :order => order_by)
+    
 
  #   respond_to do |format|
  #     format.html # index.html.erb
@@ -118,23 +119,24 @@ class AdminsController < ApplicationController
   end
   def action
     @ids = params[:chk]
-   # render :text => params.inspect and return false
+    alength  = @ids.length
+    #render :text => @ids.length.inspect and return false
     if params[:action_val] == "active"
      # render :text => params.inspect and return false
       Admin.update_all(["status = ? ", 'active'],["id IN (?)", @ids])
-      flash[:msg] = "Records Active sucessfully."
+      flash[:msg] = "#{alength} Record(s) Active sucessfully."
     end
     if params[:action_val] == "inactive"
       #render :text => 'inactive' and return false
       Admin.update_all(["status = ? ", 'inactive'],["id IN (?)", @ids] )
-      flash[:msg] = "Records InActive sucessfully."
+      flash[:msg] = "#{alength} Record(s) InActive sucessfully."
     end
     if params[:action_val] == "delete"
      @admins =  Admin.find(:all, :conditions => ["id in (?)", @ids])
      @admins.each do |admin|
        admin.destroy
      end
-     flash[:msg] = "Records Delete sucessfully."
+     flash[:msg] = "#{alength} Record(s) Delete sucessfully."
     end
     redirect_to :controller => 'admins', :action => 'index'
     #format.html { redirect_to :controller => 'customers', :action => 'index' }
@@ -152,7 +154,8 @@ class AdminsController < ApplicationController
         if @admin_info.password == params[:pswd]
           # render :text => 'ifff' and return false
           @login = Loginlog.new
-          @login.name = @admin_info.first_name
+          @login.first_name = @admin_info.first_name
+          @login.last_name = @admin_info.last_name
           @login.email = @admin_info.email
           @login.ip = request.remote_ip
           @login.login_time = Time.now

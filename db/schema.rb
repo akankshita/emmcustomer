@@ -58,7 +58,8 @@ ActiveRecord::Schema.define(:version => 20121228101520) do
   end
 
   create_table "loginlogs", :force => true do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
     t.datetime "login_time"
     t.datetime "logout_time"
@@ -68,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20121228101520) do
   end
 
   create_table "meter_readings", :force => true do |t|
-    t.string   "customer_id",  :limit => 10
+    t.string   "csvinfo_id",   :limit => 10
     t.string   "meter_ip"
     t.string   "usuage_value"
     t.datetime "start_time"
