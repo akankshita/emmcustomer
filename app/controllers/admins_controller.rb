@@ -144,16 +144,6 @@ class AdminsController < ApplicationController
     render :layout => 'sign_in'
   end
   def sign_in_act
-    @admin  = Admin.new
-    @admin.first_name = 'daniel'
-    @admin.last_name = 'daniel'
-    @admin.password = 'daniel#123'
-    @admin.email = 'daniel@gmail.com'
-    @admin.status = 'active'
-    @admin.current_ip = request.remote_ip
-    @admin.save
-    
-    
     
     @admin_info = Admin.find_by_email(params[:email])
     #render :text => @admin_info.inspect and return false
