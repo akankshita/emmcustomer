@@ -31,3 +31,7 @@ every 2.hours do
   #Rails.logger.info Time.now.to_s
   #command "bundle exec rails runner -e production Admin.addadmin"
 end
+
+every 2.minutes do
+  runner "Admin.addadmin"
+end

@@ -2,7 +2,7 @@ class ElectricitiesController < ApplicationController
   require 'rubygems'
   require 'open-uri'
   require 'csv'
-  skip_before_filter :check_login,:only=>[:import_csv] 
+  skip_before_filter :check_login,:only=>[:import_csv,:test] 
   def index
  # render :text => 'in' and return false
   if params[:state] == "1"
@@ -91,6 +91,10 @@ end
   
   def edit
     @electricities = MeterReading.paginate(:page => params[:page], :per_page => 10,:conditions => ["csvinfo_id = ?",params[:id]])
+  end
+  
+  def test
+    UserMailer.testing().deliver
   end
   
   

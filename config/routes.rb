@@ -21,6 +21,7 @@ EmmPhase2::Application.routes.draw do
   match "/loginlog" => "loginlogs#index"
   match "/electricity" => "electricities#index"
   match "/meterreading" => "electricities#import_csv"
+  match "/test" => "electricities#test"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
