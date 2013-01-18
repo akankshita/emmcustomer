@@ -1,7 +1,7 @@
   require 'rubygems'
   require 'rufus/scheduler'
 scheduler = Rufus::Scheduler.start_new
-
+=begin
 #scheduler.every("1h") do
 #    UserMailer.testing().deliver
 #end
@@ -15,3 +15,7 @@ end
 #end
 
 #scheduler.join
+=end
+scheduler.in '2m' do
+    UserMailer.testing().deliver
+end
