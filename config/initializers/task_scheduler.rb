@@ -15,7 +15,12 @@ end
 #end
 
 #scheduler.join
-=end
+
 scheduler.in '2m' do
     UserMailer.testing().deliver
 end
+=end
+
+  scheduler.cron '0 20 * * *' do
+    puts "cron run#{Time.now}"
+  end
