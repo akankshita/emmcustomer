@@ -4,6 +4,10 @@ scheduler = Rufus::Scheduler.start_new
 #    UserMailer.testing().deliver
 #end
 
-scheduler.cron("2 * * * *") do
+#scheduler.cron("2 * * * *") do
+#    UserMailer.testing().deliver
+#end
+
+scheduler.at("18:02") do
     UserMailer.testing().deliver
-end 
+end
