@@ -130,6 +130,42 @@
             </div>
         <!--/form-->
         </div>
+        
+        <div class="span5 well">
+            <form class="form-horizontal">
+        <h4>DB Information</h4>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Host</label>
+            <div class="controls">
+              <%= f.text_field :db_host,:class=>"span8",:placeholder=>"Database Host Name"%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Database</label>
+            <div class="controls">
+              <%= f.text_field :db_name,:class=>"span8",:placeholder=>"Database Name"%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">User</label>
+            <div class="controls">
+              <%= f.text_field :db_username,:class=>"span8",:placeholder=>"Database User Name"%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Port</label>
+            <div class="controls">
+              <%= f.text_field :db_port,:class=>"span8",:placeholder=>"Database Port Name"%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Password</label>
+            <div class="controls">
+              <%= f.text_field :db_password,:class=>"span8",:placeholder=>"Database Password Name"%>
+            </div>
+        </div>
+        <!--/form-->
+        </div>        
       <%end%>
     </div>
     </div>	

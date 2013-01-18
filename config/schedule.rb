@@ -23,7 +23,16 @@
 require File.expand_path(File.dirname(__FILE__) + "/environment")
 #env :PATH,'/home/tt-09/.rvm/rubies/ruby-1.9.3-p286/bin/ruby' 
 set :output, "log/cron_log.log"
-every 8.hours do
+#every 8.hours do
+#  runner "Admin.addadmin"
+  #command "rm -rf #{Rails.root}/tmp/cache/assets/"
+  #command "rm -rf #{Rails.root}/tmp/cache/assets/"
+  #command "5 * * * * /usr/bin/wget -O - -q -t 1 http://localhost/cron.php"
+  #Rails.logger.info Time.now.to_s
+  #command "bundle exec rails runner -e production Admin.addadmin"
+#end
+
+every 5.minutes do
   runner "Admin.addadmin"
   #command "rm -rf #{Rails.root}/tmp/cache/assets/"
   #command "rm -rf #{Rails.root}/tmp/cache/assets/"

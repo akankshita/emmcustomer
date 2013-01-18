@@ -5,8 +5,7 @@ class AdminsController < ApplicationController
   # GET /posts.json
   #before_filter :check_login
   def index
-   
-  #render :text =>session.inspect and return false
+
   if params[:state] == "1"
       @state = 0
       sort = "ASC"

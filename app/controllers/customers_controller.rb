@@ -64,6 +64,7 @@ class CustomersController < ApplicationController
   def edit
     @customer = Customer.find(params[:id])
     @csvinfos = Csvinfo.paginate(:page => params[:page], :per_page => 10,:conditions => ['customer_id =?', @customer.id])
+   
     #@csvinfos = Csvinfo.find(:all,:conditions =>['customer_id =?', @customer.id])
     #render :text => @csvinfos.inspect and return false
   end
@@ -93,7 +94,8 @@ class CustomersController < ApplicationController
   # PUT /posts/1.json
   def update
     @customer = Customer.find(params[:id])
-
+    @csvinfos = Csvinfo.paginate(:page => params[:page], :per_page => 10,:conditions => ['customer_id =?', @customer.id])
+# render :text => @csvinfos.inspect and return false
     respond_to do |format|
       if @customer.update_attributes(params[:customer])
         flash[:msg] = 'Customer was successfully Updated.'
