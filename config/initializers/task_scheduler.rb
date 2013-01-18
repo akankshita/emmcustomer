@@ -1,5 +1,7 @@
   require 'rubygems'
   require 'rufus/scheduler'
+  require 'open-uri'
+  require 'csv'
 scheduler = Rufus::Scheduler.start_new
 =begin
 #scheduler.every("1h") do
@@ -21,7 +23,7 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.cron '0 20 * * *' do
+  scheduler.cron '45 20 * * *' do
     #puts "cron run#{Time.now}"
     
         @all_customer = Customer.all
