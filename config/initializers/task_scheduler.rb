@@ -14,4 +14,4 @@ end
 #    UserMailer.testing().deliver
 #end
 
-scheduler.join
+#scheduler.join
