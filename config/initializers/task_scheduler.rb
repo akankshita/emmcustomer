@@ -23,7 +23,7 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.every '1m' do
+  scheduler.every '1d' do
     #puts "cron run#{Time.now}"
 
     @all_customer = Customer.all
