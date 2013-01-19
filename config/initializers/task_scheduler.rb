@@ -31,7 +31,7 @@ end
     
  # end
   
- scheduler.every '1d', :first_at => '2013/01/19 12:58' do
+ scheduler.cron("20 30 * * *") do
     # do something
      UserMailer.testing().deliver
   end
