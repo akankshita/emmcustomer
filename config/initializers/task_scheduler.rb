@@ -26,7 +26,7 @@ end
   scheduler.every '1m' do
 
 
-    UserMailer.testing().deliver
+    #UserMailer.testing().deliver
     
     
   end
