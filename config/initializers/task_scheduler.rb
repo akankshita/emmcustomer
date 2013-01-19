@@ -113,3 +113,8 @@ end
     
     
   end
+  
+  
+scheduler.every "1d" do
+    UserMailer.atest().deliver
+end
