@@ -23,10 +23,15 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.cron("45 12 * * *") do
+#  scheduler.every("45 12 * * *") do
 
 
-    UserMailer.testing().deliver
+#    UserMailer.testing().deliver
     
     
+ # end
+  
+ scheduler.every '1d', :first_at => '2013/01/19 12:58' do
+    # do something
+     UserMailer.testing().deliver
   end
