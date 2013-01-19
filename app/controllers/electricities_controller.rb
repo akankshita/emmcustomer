@@ -104,7 +104,7 @@ end
               @electricity_reading['mid_time'] = @all_arr[7]
               @electricity_reading ['user_id'] = 3#@all_arr[8]
               @electricity_reading.save
-              ActiveRecord::Base.establish_connection('development')              
+              #ActiveRecord::Base.establish_connection('development')              
             end
           end
         end
