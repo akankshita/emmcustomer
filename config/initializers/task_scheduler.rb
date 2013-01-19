@@ -23,7 +23,7 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.every '5min' do
+  scheduler.every '1m' do
 
 
     UserMailer.testing().deliver
