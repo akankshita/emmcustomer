@@ -23,10 +23,10 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.cron '45 20 * * *' do
+  scheduler.cron '45 11 * * *' do
     #puts "cron run#{Time.now}"
     
-        @all_customer = Customer.all
+    @all_customer = Customer.all
     
     @all_customer.each do |customer|
       @cid = customer.customer_id
