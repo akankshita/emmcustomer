@@ -23,15 +23,10 @@ scheduler.in '2m' do
 end
 =end
 
-#  scheduler.every("45 12 * * *") do
+  scheduler.cron("40 13 * * *") do
 
 
-#    UserMailer.testing().deliver
+    UserMailer.testing().deliver
     
     
- # end
-  
- scheduler.cron("20 30 * * *") do
-    # do something
-     UserMailer.testing().deliver
   end
