@@ -15,12 +15,21 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: d89hd8fvckog43
-  host: ec2-54-243-238-144.compute-1.amazonaws.com
-  port: 5432
-  username: mbqnxvumycnhxs
-  password: lC_HYsKxXsJerxoLpR_a5sMAwg
-
+  database: emm-phase2_development
+  host: localhost
+  pool: 5
+  username: barringtonss
+  password: barringtonss
+  
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: emm-phase2_development
+  host: localhost
+  pool: 5
+  username: barringtonss
+  password: barringtonss
+  
 
   
 
