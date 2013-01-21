@@ -23,10 +23,10 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.every '1d' do
+  scheduler.every '5m' do
     #puts "cron run#{Time.now}"
 ActiveRecord::Base.establish_connection('development')  
-    @all_customer = Customer.all
+  @all_customer = Customer.all(:order=> "customer_id asc")
     
     @all_customer.each do |customer|
       @cid = customer.customer_id
@@ -43,6 +43,7 @@ ActiveRecord::Base.establish_connection('development')
           end
           csvarray = CSV.read("test.csv")
           total_count = csvarray.length-1
+          
           csvinfo= {}
           csvinfo['customer_id'] = customer.id
           csvinfo['name'] = $tdate+'.csv'
@@ -66,6 +67,7 @@ ActiveRecord::Base.establish_connection('development')
               graph_data['kwh'] = "100"#@all_arr[5]
               @meter_reading = MeterReading.new(graph_data)
               @meter_reading.save
+              # UserMailer.atest().deliver
               ActiveRecord::Base.establish_connection(
                 :adapter  => "postgresql",
                 :host     => "#{customer.db_host}",#"ec2-54-243-238-144.compute-1.amazonaws.com",
@@ -93,15 +95,7 @@ ActiveRecord::Base.establish_connection('development')
               @electricity_reading['mid_time'] = @all_arr[7]
               @electricity_reading ['user_id'] = 3#@all_arr[8]
               @electricity_reading.save
-              ActiveRecord::Base.establish_connection(
-                :adapter  => "postgresql",
-                :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
-                :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
-                :port => 5432,
-                :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
-                :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
-              )  
-              ActiveRecord::Base.establish_connection('development')              
+              ActiveRecord::Base.establish_connection('development')  
             end
           end
         end
@@ -109,6 +103,7 @@ ActiveRecord::Base.establish_connection('development')
       end
      
     end
+    ActiveRecord::Base.establish_connection('development')  
     UserMailer.testing().deliver
     
     
