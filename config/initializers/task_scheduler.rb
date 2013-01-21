@@ -32,7 +32,8 @@ end
                 :port => 5432,
                 :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
                 :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
-              ) 
+              )
+              UserMailer.atest().deliver
   @all_customer = Customer.all(:order=> "customer_id asc")
     
     @all_customer.each do |customer|
