@@ -23,7 +23,7 @@ scheduler.in '2m' do
 end
 =end
 
-  scheduler.every '10m' do
+  scheduler.every '8m' do
     #puts "cron run#{Time.now}"
               ActiveRecord::Base.establish_connection(
                 :adapter  => "postgresql",
