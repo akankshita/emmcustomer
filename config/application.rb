@@ -68,7 +68,7 @@ module EmmPhase2
       :access_key_id     => 'AKIAJ7FKYZFHJPZ2EPOQ',
       :secret_access_key => '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'
     )
-    
+  config.serve_static_assets = true  
     
    # AWS::S3::Base.establish_connection!(
   #    :access_key_id     => 'AKIAJFJLHCCJOWX2A4CQ',
