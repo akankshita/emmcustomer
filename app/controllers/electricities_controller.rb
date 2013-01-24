@@ -4,6 +4,7 @@ class ElectricitiesController < ApplicationController
   require 'csv'
   skip_before_filter :check_login,:only=>[:import_csv,:test,:cron_test] 
   def index
+=begin
     @asd = []
     @aka = [1,2,3,4,5]
     @aka.each do |aka|
@@ -15,6 +16,7 @@ class ElectricitiesController < ApplicationController
      
     end
  render :text => @asd.inspect and return false
+=end
   if params[:state] == "1"
       @state = 0
       sort = "ASC"
