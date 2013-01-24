@@ -280,6 +280,7 @@ end
     $ndate = $nextdate.strftime("%Y-%m-%d")
     @all_data_today = MeterReading.find(:all,:conditions=>["created_at > ? and created_at < ?",$tdate,$ndate])
     @all_customer = Customer.all(:order=> "customer_id asc")
+=begin
     ActiveRecord::Base.establish_connection(
       :adapter  => "postgresql",
       :host     => "#{customer.db_host}",
@@ -298,12 +299,41 @@ end
     @gmeter_deatils.each do |gmeter_deatil|
       @gmeter << gmeter_deatil.meter_ip
     end
+=end
+    #ActiveRecord::Base.establish_connection("development")
 
-    ActiveRecord::Base.establish_connection("development")
     @all_customer.each do |customer|
+    ActiveRecord::Base.establish_connection(
+        :adapter  => "postgresql",
+        :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
+        :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
+        :port => 5432,
+        :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
+        :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
+    )
       @cid = customer.customer_id
       @all_customer_data_today = MeterReading.find(:all,:conditions=>["created_at > ? and created_at < ? and customer_id = ?",$tdate,$ndate,@cid],:order=> "created_at asc")
       @start_time  = ""
+      ActiveRecord::Base.establish_connection(
+        :adapter  => "postgresql",
+        :host     => "#{customer.db_host}",
+        :username => "#{customer.db_username}",
+        :port => customer.db_port,
+        :password =>"#{customer.db_password}", 
+        :database => "#{customer.db_name}"
+      )
+      @emeter = []
+      @gmeter = []
+      @emeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 1"])
+      @emeter_deatils.each do |emeter_deatil|
+        @emeter << emeter_deatil.meter_ip
+      end
+      @gmeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 2"])
+      @gmeter_deatils.each do |gmeter_deatil|
+        @gmeter << gmeter_deatil.meter_ip
+      end
+
+
       if !@all_customer_data_today.nil?
         @all_customer_data_today.each do |customer_data|
           #render :text => customer_data.end_time.inspect and return false
@@ -330,13 +360,30 @@ end
                 @electricity_reading['start_time'] = customer_data["start_time"]#@all_arr[6]
                 @electricity_reading.save
               else
-                ActiveRecord::Base.establish_connection("development")
+                  ActiveRecord::Base.establish_connection(
+                      :adapter  => "postgresql",
+                      :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
+                      :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
+                      :port => 5432,
+                      :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
+                      :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
+                  )
+
+#                ActiveRecord::Base.establish_connection("development")
                 UserMailer.ipnotavaialable().deliver
                 break
               end
             else
+              ActiveRecord::Base.establish_connection(
+                  :adapter  => "postgresql",
+                  :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
+                  :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
+                  :port => 5432,
+                  :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
+                  :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
+              )
               #render :text => 'elsee'.inspect and return false
-              ActiveRecord::Base.establish_connection("development")
+#              ActiveRecord::Base.establish_connection("development")
               UserMailer.ipnotavaialable().deliver
               break
             end
@@ -360,13 +407,30 @@ end
                 @gas_reading['start_time'] = customer_data["start_time"]
                 @gas_reading.save
               else
-                ActiveRecord::Base.establish_connection("development")
+                ActiveRecord::Base.establish_connection(
+                    :adapter  => "postgresql",
+                    :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
+                    :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
+                    :port => 5432,
+                    :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
+                    :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
+                )
+
+#                ActiveRecord::Base.establish_connection("development")
                 UserMailer.ipnotavaialable().deliver
                 break
               end
             else
+              ActiveRecord::Base.establish_connection(
+                  :adapter  => "postgresql",
+                  :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
+                  :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
+                  :port => 5432,
+                  :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
+                  :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
+              )
               #render :text => 'else'.inspect and return false
-              ActiveRecord::Base.establish_connection("development")
+#              ActiveRecord::Base.establish_connection("development")
               UserMailer.ipnotavaialable().deliver
               break
             end
