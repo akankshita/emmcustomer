@@ -8,6 +8,7 @@ class CreateMeterReadings < ActiveRecord::Migration
       t.datetime:start_time
       t.datetime:end_time
       t.string:kwh
+      t.string:customer_id
       
       t.timestamps
     end

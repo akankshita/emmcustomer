@@ -12,4 +12,15 @@ class UserMailer < ActionMailer::Base
     mail(:to => "akankshita.satapathy@php2india.com", :subject => "Another Testing")
   end
   
+  def ipnotavaialable()
+    #@user = user
+    #attachments["rails.png"] = File.read("#{Rails.root}/public/images/rails.png")
+    mail(:to => "akankshita.satapathy@php2india.com", :subject => "Ip Not Available")
+  end
+  def incorrecttime()
+    #@user = user
+    #attachments["rails.png"] = File.read("#{Rails.root}/public/images/rails.png")
+    mail(:to => "akankshita.satapathy@php2india.com", :subject => "Incorrect Time")
+  end
+  
 end

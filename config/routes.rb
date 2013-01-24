@@ -22,6 +22,8 @@ EmmPhase2::Application.routes.draw do
   match "/electricity" => "electricities#index"
   match "/meterreading" => "electricities#import_csv"
   match "/test" => "electricities#test"
+  match "/insert_to_customer_panel" => "electricities#insert_to_customer_panel"
+  match "/cron_test" => "electricities#cron_test"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
