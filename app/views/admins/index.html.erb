@@ -34,7 +34,9 @@
       <button type="submit" class="btn btn-inverse" onclick="return Action(document.cfrm,'delete');">Delete</button>
       <%= link_to 'New Administrator', new_admin_path ,:class=>"btn btn-inverse"%>
       </div>
+
       <div class="clearfix"></div>
+      <div ><b> Total Number Of Records : </b><%=@admins.count%></div>
       <%if @admins.length > 0%>
       <table class="table table-bordered table-striped ">
         <thead>
