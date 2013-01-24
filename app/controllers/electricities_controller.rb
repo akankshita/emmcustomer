@@ -443,7 +443,14 @@ end
 
       end
     end    
-
+    ActiveRecord::Base.establish_connection(
+        :adapter  => "postgresql",
+        :host     => "ec2-54-243-238-144.compute-1.amazonaws.com",#"ec2-54-243-238-144.compute-1.amazonaws.com",
+        :username => "mbqnxvumycnhxs",#izqcdmliwozmgx",
+        :port => 5432,
+        :password =>"lC_HYsKxXsJerxoLpR_a5sMAwg", #"35JS51QKt5gQHm2HOH2D97p7kZ",
+        :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
+    )
     
     
   end
