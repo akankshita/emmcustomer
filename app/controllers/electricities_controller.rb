@@ -222,7 +222,7 @@ end
         :database => "d89hd8fvckog43"#"d5v3qoof2vr5rs"
     )
     @all_customer = Customer.all(:order=> "customer_id asc")
-    render :text => @all_customer.inspect and return false
+  #  render :text => @all_customer.inspect and return false
     @all_customer.each do |customer|
       @cid = customer.customer_id
       @csv_info = AWS::S3::Bucket.objects('emissionmanagement',:prefix => @cid )
