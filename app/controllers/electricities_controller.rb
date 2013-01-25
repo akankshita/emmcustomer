@@ -402,7 +402,7 @@ end
                 )
               @last_record_details = GasReading.last
               $time_diff_last = ((customer_data.start_time - @last_record_details.start_time)/60).round.to_i
-              if($time_diff_last == 30 ) 
+              if($time_diff_last == 30 || @last_record_details.nil?) 
                 @gas_reading = GasReading.new
                 @gas_reading['gas_value'] = customer_data["kwh"]
                 @gas_reading['end_time'] = customer_data["end_time"]
