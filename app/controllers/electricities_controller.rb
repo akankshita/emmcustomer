@@ -345,11 +345,12 @@ end
       @gmeter_deatils.each do |gmeter_deatil|
         @gmeter << gmeter_deatil.meter_ip
       end
-
+      @emeter = ['192.168.1.1','192.168.1.2','192.168.1.3']
+      @gmeter = ['192.168.1.1','192.168.1.2','192.168.1.3']
 
       if !@all_customer_data_today.nil?
         @all_customer_data_today.each do |customer_data|
-          #render :text => customer_data.end_time.inspect and return false
+          render :text => customer_data.customer_data.meter_ip.inspect and return false
           if customer_data.meter_id == 1
             $time_diff = ((customer_data.end_time - customer_data.start_time)/60).round.to_i#((customer_data.start_time - customer_data.end_time) / 1.hours).round#time_diff(customer_data.start_time,customer_data.end_time)#(customer_data.start_time.minus_with_coercion(customer_data.end_time)/360).round#customer_data.end_time - customer_data.start_time
             #render :text =>$time_diff.inspect and return false
