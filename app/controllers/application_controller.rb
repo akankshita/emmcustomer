@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
    before_filter :check_login
   def check_login
+    #ActiveRecord::Base.establish_connection("developemnt")
 =begin    
     ActiveRecord::Base.establish_connection(
         :adapter  => "postgresql",

@@ -3,3 +3,21 @@
 
 en:
   hello: "Hello world"
+  views:
+    will_paginate:
+      previous_label: "&#8592; Previous"
+      next_label: "Next &#8594;"
+      page_gap: "&hellip;"
+
+      page_entries_info:
+        single_page:
+          zero:  "No %{plural} found"
+          one:   "Displayingg 1 %{name}"
+          other: "Displayingg all %{count} %{plural}"
+        single_page_html:
+          zero:  "No %{plural} found"
+          one:   "Displayingg <b>1</b> %{name}"
+          other: "Displayingg <b>all&nbsp;%{count}</b> %{plural}"
+
+        multi_page: "Displayingg %{plural} %{from} - %{to} of %{total} in total"
+        multi_page_html: "Displayingg %{plural} <b class='range'>%{from}&nbsp;-&nbsp;%{to}</b> of <b class='total'>%{total}</b> in total"

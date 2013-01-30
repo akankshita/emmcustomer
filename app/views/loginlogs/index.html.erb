@@ -80,6 +80,7 @@
               <strong>No LoginLogs Found</strong>
             </div>  
         <%end%>
+        <%= page_entries_info %>
         <%= will_paginate @login_infos, :renderer => BootstrapPagination::Rails %>
            </form>
     </div>

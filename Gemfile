@@ -45,6 +45,7 @@ gem 'aws-s3', '0.6.2', :require => 'aws/s3'
 gem 'whenever', :require => false
 gem 'bundler'
 gem 'will_paginate-bootstrap'
+gem 'will_paginate_renderers'
 
 #test not neded for this 
 #gem 'nokogiri'

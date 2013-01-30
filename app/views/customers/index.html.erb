@@ -115,6 +115,7 @@
               <strong>No Customer Found</strong>
             </div> 
       <%end%>
+      <%= page_entries_info %>
       <%= will_paginate @customers , :renderer => BootstrapPagination::Rails%>
   </div>
   </form>
