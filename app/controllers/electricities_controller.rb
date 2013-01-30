@@ -337,24 +337,23 @@ end
       )
       @emeter = []
       @gmeter = []
-      @emeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 2"])
+      @emeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 1"])
       @emeter_deatils.each do |emeter_deatil|
         @emeter << emeter_deatil.meter_ip
       end
-      @gmeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 1"])
+      @gmeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 2"])
       @gmeter_deatils.each do |gmeter_deatil|
         @gmeter << gmeter_deatil.meter_ip
       end
-     # @emeter = ["192.168.1.1","192.168.1.2","192.168.1.3"]
-     # @gmeter = ["192.168.1.1","192.168.1.2","192.168.1.3"]
+
 
       if !@all_customer_data_today.nil?
         @all_customer_data_today.each do |customer_data|
-          render :text => customer_data.customer_data.meter_ip.inspect and return false
+          #render :text => customer_data.end_time.inspect and return false
           if customer_data.meter_id == 1
             $time_diff = ((customer_data.end_time - customer_data.start_time)/60).round.to_i#((customer_data.start_time - customer_data.end_time) / 1.hours).round#time_diff(customer_data.start_time,customer_data.end_time)#(customer_data.start_time.minus_with_coercion(customer_data.end_time)/360).round#customer_data.end_time - customer_data.start_time
             #render :text =>$time_diff.inspect and return false
-            if (@emeter.include?("#{customer_data.meter_ip}") == true) && (!customer_data.meter_ip.nil?) 
+            if  (!customer_data.meter_ip.nil?) 
               #render :text => 'eif'.inspect and return false
                 ActiveRecord::Base.establish_connection(
                   :adapter  => "postgresql",
@@ -384,7 +383,7 @@ end
                   )
 
 #                ActiveRecord::Base.establish_connection("development")
-                UserMailer.incorrecttime().deliver
+                UserMailer.ipnotavaialable().deliver
                 break
               end
             else
@@ -403,7 +402,7 @@ end
             end
           end
           if customer_data.meter_id == 2
-            if (@gmeter.include?("#{customer_data.meter_ip}") == true) && (!customer_data.meter_ip.nil?) 
+            if  (!customer_data.meter_ip.nil?) 
                 ActiveRecord::Base.establish_connection(
                   :adapter  => "postgresql",
                   :host     => "#{customer.db_host}",
@@ -431,7 +430,7 @@ end
                 )
 
 #                ActiveRecord::Base.establish_connection("development")
-                UserMailer.incorrecttime().deliver
+                UserMailer.ipnotavaialable().deliver
                 break
               end
             else
