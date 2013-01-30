@@ -339,14 +339,14 @@ end
       @gmeter = []
       @emeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 2"])
       @emeter_deatils.each do |emeter_deatil|
-      #  @emeter << emeter_deatil.meter_ip
+        @emeter << emeter_deatil.meter_ip
       end
       @gmeter_deatils = Meter.find(:all,:conditions => ["source_type_id = 1"])
       @gmeter_deatils.each do |gmeter_deatil|
-      #  @gmeter << gmeter_deatil.meter_ip
+        @gmeter << gmeter_deatil.meter_ip
       end
-      @emeter = ["192.168.1.1","192.168.1.2","192.168.1.3"]
-      @gmeter = ["192.168.1.1","192.168.1.2","192.168.1.3"]
+     # @emeter = ["192.168.1.1","192.168.1.2","192.168.1.3"]
+     # @gmeter = ["192.168.1.1","192.168.1.2","192.168.1.3"]
 
       if !@all_customer_data_today.nil?
         @all_customer_data_today.each do |customer_data|
