@@ -383,7 +383,7 @@ end
                   )
 
 #                ActiveRecord::Base.establish_connection("development")
-                UserMailer.incorrecttime(customer_data).deliver
+                UserMailer.incorrecttime().deliver
                 break
               end
             else
@@ -397,7 +397,7 @@ end
               )
               #render :text => 'elsee'.inspect and return false
 #              ActiveRecord::Base.establish_connection("development")
-              UserMailer.ipnotavaialable(customer_data).deliver
+              UserMailer.ipnotavaialable().deliver
               break
             end
           end
@@ -430,7 +430,7 @@ end
                 )
 
 #                ActiveRecord::Base.establish_connection("development")
-                UserMailer.incorrecttime(customer_data).deliver
+                UserMailer.incorrecttime().deliver
                 break
               end
             else
@@ -444,7 +444,7 @@ end
               )
               #render :text => 'else'.inspect and return false
 #              ActiveRecord::Base.establish_connection("development")
-              UserMailer.ipnotavaialable(customer_data).deliver
+              UserMailer.ipnotavaialable().deliver
               break
             end
           end
