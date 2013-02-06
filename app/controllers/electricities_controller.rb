@@ -353,7 +353,7 @@ end
           if customer_data.meter_id == 1
             $time_diff = ((customer_data.end_time - customer_data.start_time)/60).round.to_i#((customer_data.start_time - customer_data.end_time) / 1.hours).round#time_diff(customer_data.start_time,customer_data.end_time)#(customer_data.start_time.minus_with_coercion(customer_data.end_time)/360).round#customer_data.end_time - customer_data.start_time
             #render :text =>$time_diff.inspect and return false
-            if  (!customer_data.meter_ip.nil?) 
+            if (@emeter.include?("#{customer_data.meter_ip}") == true) && (!customer_data.meter_ip.nil?) && ($time_diff == 30)
               #render :text => 'eif'.inspect and return false
                 ActiveRecord::Base.establish_connection(
                   :adapter  => "postgresql",
@@ -402,7 +402,7 @@ end
             end
           end
           if customer_data.meter_id == 2
-            if  (!customer_data.meter_ip.nil?) 
+            if (@gmeter.include?("#{customer_data.meter_ip}") == true) && (!customer_data.meter_ip.nil?) && ($time_diff == 30)
                 ActiveRecord::Base.establish_connection(
                   :adapter  => "postgresql",
                   :host     => "#{customer.db_host}",

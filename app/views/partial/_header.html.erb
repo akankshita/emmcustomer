@@ -1,21 +1,50 @@
 <div class="navbar">
 <div class="navbar-inner">
-    <%= link_to "eMMSystem","/dashboard",:class=>"brand" %>
+    <%= link_to image_tag('logo.png',:width=>"200"),"/dashboard",:class=>"brand" %>
     <ul class="nav">
            <li><%= link_to "Home","/dashboard" %></li>
         <li class="divider-vertical"></li>
-        <li><%= link_to "Administrators","/admins" %></li>
+        <!--li><%#= link_to "Administrators","/admins" %></li-->
+        <li class="dropdown">
+            <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Master <b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li><a tabindex="-1" href="/admins">Administrator</a></li>
+                <li><a tabindex="-1" href="/position">Positions</a></li>
+                <li><a tabindex="-1" href="/country">Country</a></li>
+                <li><a tabindex="-1" href="/state">State</a></li>
+                <li><a tabindex="-1" href="/city">Cities</a></li>
+            </ul>
+        </li>
         <li class="divider-vertical"></li>
         <li><%= link_to "Login Logs","/loginlogs" %></li>
         <li class="divider-vertical"></li>
         <li><%= link_to "Customers","/customers" %></li>
         <li class="divider-vertical"></li>
-        <li><%= link_to "Meter Readings","/electricities" %></li>
+        <!--li><%#= link_to "Meter Readings","/electricities" %></li-->
+        <li class="dropdown">
+            <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Electric Readings <b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li><a tabindex="-1" href="#">Gas Readings</a></li>
+                <li><a tabindex="-1" href="#">LPG Readings</a></li>
+                <li><a tabindex="-1" href="#">Water Readings</a></li>
+            </ul>
+        </li>
+
         <li class="divider-vertical"></li>
         <!--li><%#= link_to "Settings","/setting" %></li-->
+        <li class="dropdown">
+            <a id="drop1" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Settings<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                <li><a tabindex="-1" href="#">General Settings</a></li>
+                <li><a tabindex="-1" href="#"> Email Templates</a></li>
+            </ul>
+        </li>
         <%if !session[:login_id].nil?%>
             <li><%= link_to "Sign Out","/signout" %></li>
         <%end%>
     </ul>
 </div>
 </div>
+<script>
+    $('.dropdown-toggle').dropdown();
+</script>

@@ -1,10 +1,12 @@
 class Admin < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :first_name, :last_name, :email, :password, :status,:current_ip
-  validates_presence_of :first_name,:last_name,:email,:password
-  validates :email,:uniqueness => true,:on => :create
+  attr_accessible :first_name, :last_name, :email, :password, :status,:current_ip,:email2, :country_id, :state_id, :city_id, :zip_code, :phone, :phone1, :mobile
+  validates_presence_of :first_name,:last_name,:email,:email2, :country_id, :state_id, :city_id, :zip_code, :phone, :phone1, :mobile
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => " Invalid Format"
-  validates_presence_of :password, :length => {:minimum => 6}
+  validates_format_of :email2, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => " Invalid Format"
+  validates :email,:uniqueness => true,:on => :create
+  validates_presence_of :password,:on => :create
+  validates_length_of :password, :minimum => 6, :too_short => "needs minimun 6 character",:on => :create
   
    def self.cron_job
      # logger.info Time.now.to_s

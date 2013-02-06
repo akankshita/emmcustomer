@@ -6,6 +6,12 @@ EmmPhase2::Application.routes.draw do
   resources :electricities
   resource :dashboards
   resource :settings
+  resource :countries
+  resource :states
+  resource :cities
+  resource :positions
+  match "/state_change" => "admins#state_change"
+  match "/city_change" => "admins#city_change"
   match "/" => "admins#sign_in"
   match "/customer/action" => "customers#action"
   match "sign_in" => "admins#sign_in"
@@ -24,6 +30,18 @@ EmmPhase2::Application.routes.draw do
   match "/test" => "electricities#test"
   match "/insert_to_customer_panel" => "electricities#insert_to_customer_panel"
   match "/cron_test" => "electricities#cron_test"
+  
+  
+  match "/country" => "countries#index"
+  match "/country/action" => "countries#action"
+  match "/state" => "states#index"
+  match "/state/action" => "states#action"
+  match "/city" => "cities#index"
+  match "/city/action" => "cities#action"
+  match "/position" => "positions#index"
+  match "/position/action" => "positions#action"
+  
+ 
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

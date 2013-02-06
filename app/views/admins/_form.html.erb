@@ -1,67 +1,166 @@
 <div class="container-fluid">
-  <div class="row-fluid">
-  <div class="span10">
-      <!--div class="page-header">
-      <h2>Administrators</h2>
-      </div-->
-      <ul class="breadcrumb">
-      <li><a href="#">Home</a> <span class="divider">/</span></li>
-      <%if @admin.id.nil?%>
-        <li class="active">Add Administrator</li>
-      <%else%>
-        <li class="active">Edit Administrator</li>
-      <%end%>
-      </ul>
-
-      <%= form_for(@admin,:html=>{:class=>"form-horizontal"}) do |f| %>
+    <div class="row-fluid">
+    <div class="span10">
+         <!--div class="page-header">
+        <h2>Add Customer</h2>
+        </div-->
+        <ul class="breadcrumb">
+        <li><a href="#">Home</a> <span class="divider">/</span></li>
+          <%if @admin.id.nil?%>
+            <li class="active">Add Administrator</li>
+          <%else%>
+            <li class="active">Edit Administrator</li>
+          <%end%>
+        </ul>
+        <!--div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">?</button>
+        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+        </div-->
+        
+        <%= form_for(@admin,:html=>{:class=>"form-horizontal"}) do |f| %>
         <% if @admin.errors.any? %>
-          <div id="error_explanation">
-          <!--h2><%#= pluralize(@admin.errors.count, "error") %> prohibited this post from being saved:</h2-->
-            <div class="alert alert-error">
-              <button type="button" class="close" data-dismiss="alert">x</button>
-              <strong><%=@admin.errors.full_messages[0] %></strong>
+          <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <strong><%=@admin.errors.full_messages[0] %></strong>
+          </div>
+        <% end %>
+        <div class="span5 well">
+          <!--form class="form-horizontal"-->
+        <h4>Primary Information</h4>
+          <div class="control-group">
+            <%= f.label :first_name ,:class=>"control-label"%>
+              <div class="controls">
+                <%= f.text_field :first_name,:class=>"span8",:placeholder=>"First Name"%>
+              </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :last_name,:class=>"control-label"%>
+              <div class="controls">
+                <%= f.text_field :last_name,:class=>"span8",:placeholder=>"Last Name"%>
+              </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :email,:class=>"control-label"%>
+              <div class="controls">
+                <%= f.text_field :email,:class=>"span8",:placeholder=>"Email"%>
+              </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :password,:class=>"control-label"%>
+              <div class="controls">
+                <%= f.password_field:password,:class=>"span8",:placeholder=>"Password"%>
+              </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :status,:class=>"control-label"%>
+              <div class="controls">
+                <%= f.select :status, [['Active','active'],['Inactive','inactive']],{},{:class => 'span8'} %>
+                <br><br>
+                   <%= f.submit 'Submit',:class=>'btn'%>
+              </div>
+          </div>
+        <!--/form-->
+        </div>
+        <div class="span5 well">
+            <form class="form-horizontal">
+        <h4>Contact Information</h4>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Alternet Email address</label>
+            <div class="controls">
+              <%= f.text_field :email2,:class=>"span8",:placeholder=>"Alternet Email address "%>
             </div>
-         </div>
-      <% end %>
-      <div class="control-group">
-        <%= f.label :first_name ,:class=>"control-label"%>
-          <div class="controls">
-            <%= f.text_field :first_name,:class=>"span3",:placeholder=>"First Name"%>
-          </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :last_name,:class=>"control-label"%>
-          <div class="controls">
-            <%= f.text_field :last_name,:class=>"span3",:placeholder=>"Last Name"%>
-          </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :email,:class=>"control-label"%>
-          <div class="controls">
-            <%= f.text_field :email,:class=>"span3",:placeholder=>"Email"%>
-          </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :password,:class=>"control-label"%>
-          <div class="controls">
-            <%= f.password_field:password,:class=>"span3",:placeholder=>"Password"%>
-          </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :status,:class=>"control-label"%>
-          <div class="controls">
-            <%= f.select :status, [['Active','active'],['Inactive','inactive']] %>
-            <br><br>
-               <%= f.submit 'Submit',:class=>'btn'%>
-          </div>
-      </div>
+            </div>
+          <div class="control-group">
+            <%= f.label :country_id,:class=>"control-label"%>
+              <div class="controls" id="c_country">
+                <%= select("admin", "country_id", Country.all.collect {|p| [ p.name, p.id ] }, { :prompt => "Select Country"},:class=>"span8") %>
+               <%#= select_tag("admin[country_id]", options_from_collection_for_select(Country.all, "id", "name", params[:country_id].to_i),:class=>"span8") %>
+              </div>
+          </div>        
+
+          <div class="control-group">
+            <%= f.label :state_id,:class=>"control-label"%>
+              <div class="controls" id="c_state">
+                <%= select("admin", "state_id", State.all.collect {|p| [ p.name, p.id ] }, { :prompt => "Select State"},:class=>"span8") %>
+               <%#= select_tag("admin[state_id]", options_from_collection_for_select(State.all, "id", "name", params[:state_id].to_i),:class=>"span8") %>
+              </div>
+          </div>        
+
+          <div class="control-group">
+            <%= f.label :city_id,:class=>"control-label"%>
+              <div class="controls" id="c_city">
+                <%= select("admin", "city_id", City.all.collect {|p| [ p.name, p.id ] }, { :prompt => "Select City"},:class=>"span8") %>
+               <%#= select_tag("admin[city_id]", options_from_collection_for_select(City.all, "id", "name", params[:city_id].to_i),:class=>"span8") %>
+              </div>
+          </div>  
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Zip Code</label>
+            <div class="controls">
+              <%= f.text_field :zip_code,:class=>"span8",:placeholder=>"Zip Code"%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Primary Phone</label>
+            <div class="controls">
+              <%= f.text_field :phone,:class=>"span8",:placeholder=>"Primary Phone"%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Alternet Phone </label>
+            <div class="controls">
+              <%= f.text_field :phone1,:class=>"span8",:placeholder=>"Alternet Phone "%>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Cell Number</label>
+            <div class="controls">
+              <%= f.text_field :mobile,:class=>"span8",:placeholder=>"Cell Number"%>
+            </div>
+        </div>
+        <!--/form-->
+        </div>
+        
+        <!--/form-->
+        </div>        
       <%end%>
-  </div>
-  </div>
+    </div>
+    </div>	
 </div><!--/.fluid-container-->
 
 
 
+<script>
+  
+$("#admin_country_id").change(function(){
+	$.ajax({
+	url: '/state_change',
+	type: "POST",
+	data: {'id':$(this).val()},
+	//dataType: 'json',
+	success: function (data) {
+		//alert(data);return false;
+		$("#c_state").html(data);
+	}
+	});
+	 
+});
+
+$("#admin_state_id").change(function(){
+	$.ajax({
+	url: '/city_change',
+	type: "POST",
+	data: {'id':$(this).val()},
+	//dataType: 'json',
+	success: function (data) {
+		//alert(data);return false;
+		$("#c_city").html(data);
+	}
+	});
+	 
+});
+
+  
+</script>
 
 <!--
 <%#= form_for(@post) do |f| %>

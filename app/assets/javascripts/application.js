@@ -29,9 +29,13 @@ function checkAll(frm)
 
 
 function Action(frm,val) {
+	//alert('akaka');
+	document.getElementById('action_val').value=val;
+	//alert(document.getElementById('action_val').value);
+	frm.action_val.value=val;
   y = getCheckCount(frm);
   if(y > 0) {
-    frm.action_val.value=val;
+    //document.getElementById('action_val').value=val;
     frm.submit();
     return true;
   }else{
@@ -50,3 +54,6 @@ function getCheckCount(frm)
 	}
 	return x;
 }
+
+
+

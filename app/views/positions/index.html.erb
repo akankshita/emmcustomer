@@ -3,11 +3,11 @@
   <div class="row-fluid">
   <div class="span10">
       <div class="page-header">
-      <h2>Administrators</h2>
+      <h2>Position</h2>
       </div>
       <ul class="breadcrumb">
-      <li><a href="#">Home</a> <span class="divider">/</span></li>
-      <li class="active">Administrators</li>
+      <li><a href="#">Master</a> <span class="divider">/</span></li>
+      <li class="active">Position</li>
       </ul>
       <% if flash[:msg]%>
         <div class="alert alert-success">
@@ -15,53 +15,47 @@
               <strong>Well done!</strong><%=flash[:msg]%>
         </div>
       <%end%>
+      <!--div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">?</button>
+      <strong>Oh snap!</strong> Change a few things up and try submitting again.
+      </div-->
       <div class="left_topform">
-      <!--form class="form-search" action="/admin" name="sfrm" id="sfrm" method="put"-->
-      <%= form_tag("/admin", :method => "PUT",:name=>"sfrm" ,:id=>"sfrm",:class=>"form-search") do %>
-      <%#form_for '',:controller => 'admins',,:url => {:action => 'index'} do -%>
+      <%= form_tag("/position", :method => "PUT",:name=>"cfrm" ,:id=>"cfrm") do %>
         <%=text_field_tag 'keyword',params[:keyword],:class => 'input-large search-query'%>
-        <%=select_tag 'option', options_for_select([["Select Field",""],["Name","CONCAT(first_name, ' ', last_name)"], ["Email","email"],["Status","status"]], params[:option])%>
+        <%=select_tag 'option', options_for_select([["Select Field",""],["Title","title"],["Status","status"]], params[:option])%>
 
       <button type="submit" class="btn btn-primary">Search</button>
-    <%end%>
-      <!--/form-->
+      <%end%>
       </div>
-      <form class="form-search" action="/admin/action" name="cfrm" id="cfrm" method="put">
-        <input type="hidden" name="action_val" id ="action_val" value="">
-
+      <%= form_tag("/position/action", :method => "PUT",:name=>"cfrm" ,:id=>"cfrm") do %>
+      <input type="hidden" name="action_val" id ="action_val" value="">
       <div class="pull-right">
       <button type="submit" class="btn btn-inverse" onclick="return Action(document.cfrm,'active');">Make Active</button>
       <button type="submit" class="btn btn-inverse" onclick="return Action(document.cfrm,'inactive');">Make Inactive</button>
       <button type="submit" class="btn btn-inverse" onclick="return Action(document.cfrm,'delete');">Delete</button>
-      <%= link_to 'New Administrator', new_admin_path ,:class=>"btn btn-inverse"%>
+      <%= link_to 'New position', new_positions_path ,:class=>"btn btn-inverse"%>
       </div>
-
       <div class="clearfix"></div>
-      <!--div ><b> Total Number Of Records : </b><%=@admins.count%></div-->
-      <%if @admins.length > 0%>
-      <table class="table table-bordered table-striped ">
+      <!--div ><b> Total Number Of Records : </b><%=@positions.count%></div-->
+   <%if @positions.length > 0%>
+      <table class="table table-bordered table-striped">
         <thead>
-        <tr>
-          <th><input type="checkbox" onclick="checkAll(document.cfrm);" name="check_all" id="check_all"></th>
-          <th>Name</th>
-          <!--th>Last Name</th-->
-          <th>Email</th>
-          <th>Last Login IP</th>
-          <th>Status</th>
-          <th>Created Date</th>
-        </tr>
+			<tr>
+			    <th><input type="checkbox" onclick="checkAll(document.cfrm);" name="check_all" id="check_all"></th>
+			    <th>Title </th>
+			    <th>Status</th>
+			    <th>Create At</th>
+			</tr>
         </thead>
-
-        <% @admins.each do |admin| %>
+       
+        <% @positions.each do |position| %>
           <thead>
           <tr>
-          <td><input type="checkbox" id="iId" value="<%=admin.id%>" name="chk[]" ></td>
-          <td><%= link_to admin.first_name+' '+admin.last_name ,edit_admin_path(admin)%></td>
-          <!--td><%= admin.last_name %></td-->
-          <td><%= admin.email %></td>
-          <td><%= admin.current_ip %></td>
-          <td><%= admin.status.capitalize %></td>
-          <td><%= admin.created_at.strftime("%d %B %Y  %M:%H") %></td>
+          <td><input type="checkbox" id="iId" value="<%=position.id%>" name="chk[]" ></td>
+          <td><%= link_to position.title ,"positions/edit/#{position.id}"%></td>
+
+          <td><%if position.status == 0%>Active<%else%>Inactive<%end%></td>
+          <td><%= position.created_at.strftime("%d %B %Y  %M:%H") %></td>
         </tr>
         </thead>
       <% end %>
@@ -80,7 +74,7 @@
       <tbody>
       <tr>
           <td><input type="checkbox"></td>
-          <td><a href="/edit-administrator.html">Himanshu Mistry</a></td>
+          <td><a href="/edit-positionistrator.html">Himanshu Mistry</a></td>
           <td>daniel@php2india.com</td>
           <td>12th Sept 2012 12:00 PM</td>
           <td>192.178.121.112</td>
@@ -89,7 +83,7 @@
       </tr>
       <tr>
           <td><input type="checkbox"></td>
-          <td><a href="/edit-administrator.html">Jignesh Nakrani</a></td>
+          <td><a href="/edit-positionistrator.html">Jignesh Nakrani</a></td>
           <td>jignesh.nakrani@php2india.com</td>
           <td>12th Sept 2012 12:00 PM</td>
           <td>192.178.121.112</td>
@@ -101,26 +95,25 @@
       <%else%>
       <table class="table table-bordered table-striped">
         <thead>
-        <tr>
-          <th><input type="checkbox" onclick="checkAll(document.cfrm);" name="check_all" id="check_all"></th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Last Login</th>
-          <th>Last Login IP</th>
-          <th>Status</th>
-        </tr>
+			<tr>
+			    <th><input type="checkbox" onclick="checkAll(document.cfrm);" name="check_all" id="check_all"></th>
+			    <th>Title </th>
+			    <th>Status</th>
+			    <th>Create At</th>
+			</tr>
         </thead>
       </table>
-      <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>No Admin Found</strong>
-      </div>      
+            <div class="alert alert-warning">
+              <button type="button" class="close" data-dismiss="alert">x</button>
+              <strong>No position Found</strong>
+            </div> 
       <%end%>
+      <%= page_entries_info %>
+      <%= will_paginate @positions , :renderer => BootstrapPagination::Rails%>
   </div>
-  </form>
+  <%end%>
   </div>
 </div><!--/.fluid-container-->
-
 
 <!--h1>Listing posts</h1>
 
@@ -150,3 +143,4 @@
 
 <%#= link_to 'New Post', new_post_path %>
 -->
+

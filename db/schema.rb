@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228101520) do
+ActiveRecord::Schema.define(:version => 20130205140945) do
 
   create_table "admins", :force => true do |t|
     t.string   "first_name"
@@ -22,6 +22,33 @@ ActiveRecord::Schema.define(:version => 20121228101520) do
     t.string   "current_ip"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "email2"
+    t.integer  "country_id"
+    t.integer  "state_id"
+    t.integer  "city_id"
+    t.string   "zip_code"
+    t.string   "phone"
+    t.string   "phone1"
+    t.string   "mobile"
+  end
+
+  create_table "cities", :force => true do |t|
+    t.integer  "state_id"
+    t.string   "name"
+    t.string   "code"
+    t.text     "description"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "status",      :limit => 2
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.text     "description"
+    t.integer  "status",      :limit => 2
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "csvinfos", :force => true do |t|
@@ -53,8 +80,13 @@ ActiveRecord::Schema.define(:version => 20121228101520) do
     t.string   "heroku_password"
     t.string   "git_url"
     t.string   "amazon_url"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "db_host",         :limit => 225
+    t.string   "db_name",         :limit => 225
+    t.string   "db_username",     :limit => 225
+    t.string   "db_password",     :limit => 225
+    t.string   "db_port",         :limit => 225
   end
 
   create_table "loginlogs", :force => true do |t|
@@ -78,6 +110,24 @@ ActiveRecord::Schema.define(:version => 20121228101520) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.integer  "meter_id"
+    t.string   "customer_id",  :limit => 10
+  end
+
+  create_table "positions", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.integer  "status",     :limit => 2
+  end
+
+  create_table "states", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "name"
+    t.string   "code"
+    t.text     "description"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+    t.integer  "status",      :limit => 2
   end
 
 end

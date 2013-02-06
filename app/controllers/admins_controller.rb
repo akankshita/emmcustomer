@@ -29,13 +29,22 @@ class AdminsController < ApplicationController
           keyword = [" #{params[:option] .strip()} LIKE ?", "%#{params['keyword'].strip()}%"]
     #  elsif params[:option] == 'status'
 # @value = (params["keyword"].downcase =="inactive" || params["keyword"].downcase =="active")? ((params["keyword"].downcase == "inactive")? 1 : 0) : -1
-          keyword = [" #{params[:option] .strip()} =?",@value]	
+          keyword = [" #{params[:option] .strip()} =?",@value]
+
+        
       else
+       # if params[:option] == 'name'
+          #render :text => params[:keyword].inspect and return false
+        #  keyword = [" first_name LIKE ? or last_name LIKE ?", "%#{params['keyword'].strip()}%","%#{params['keyword'].strip()}%"]
+        #else
+         # render :text => 'elese' and return false
           keyword = [" #{params[:option] .strip()} LIKE ?", "%#{params['keyword'].strip()}%"]
+       # end
       end
   else
       keyword = []
   end
+  #render :text => keyword.inspect and return false
   order_by = "#{field} #{sort}"
 
     @admins = Admin.all
@@ -91,7 +100,9 @@ class AdminsController < ApplicationController
   # PUT /posts/1.json
   def update
     @admin = Admin.find(params[:id])
-
+    if params[:admin][:password].blank?
+      params[:admin][:password] = @admin.password
+    end
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
         flash[:msg] = 'Admin was successfully Updated.'
@@ -149,30 +160,29 @@ class AdminsController < ApplicationController
     @admin_info = Admin.find_by_email(params[:email])
     #render :text => @admin_info.inspect and return false
     if !@admin_info.nil?
-     
-        if @admin_info.password == params[:pswd]
-          # render :text => 'ifff' and return false
-          @login = Loginlog.new
-          @login.first_name = @admin_info.first_name
-          @login.last_name = @admin_info.last_name
-          @login.email = @admin_info.email
-          @login.ip = request.remote_ip
-          @login.login_time = Time.now
-          @login.save
-          #render :text => @login.inspect and return false
-          $global_variable = @login.id
-          session[:login_id] = @login.id
-          session[:id] = @admin_info.id
-          flash[:msg] = "Login sucessfully"
-          redirect_to "/dashboard"
-        else
-        #   render :text => 'ifeff' and return false
-          flash[:msg] = "Invalid Password"
+        if @admin_info.status == 'inactive'
+          flash[:msg] = "Your account is Inacitve"
           render :action => :sign_in ,:layout => 'sign_in'
+        else
+          if @admin_info.password == params[:pswd]
+            @login = Loginlog.new
+            @login.first_name = @admin_info.first_name
+            @login.last_name = @admin_info.last_name
+            @login.email = @admin_info.email
+            @login.ip = request.remote_ip
+            @login.login_time = Time.now
+            @login.save
+            $global_variable = @login.id
+            session[:login_id] = @login.id
+            session[:id] = @admin_info.id
+            flash[:msg] = "Login sucessfully"
+            redirect_to "/dashboard"
+          else
+            flash[:msg] = "Invalid Password"
+            render :action => :sign_in ,:layout => 'sign_in'
+          end
         end
-      #  render :layout => 'sign_in'
     else
-      #render :text => 'if' and return false
       flash[:msg] = "Invalid Email/Password combination"
       render :action => :sign_in ,:layout => 'sign_in'
     end
@@ -185,6 +195,18 @@ class AdminsController < ApplicationController
     $global_variable = nil
     flash[:msg] = "You are now logged out"
     redirect_to "/signin"
+  end
+  
+  def state_change
+	@id = params["id"]
+    @states= State.all(:conditions => "country_id = #{@id}", :order =>'id asc')    
+    render :partial => 'state', :locals => {:states => @states }
+  end
+
+  def city_change
+	@id = params["id"]
+    @cities= City.all(:conditions => "state_id = #{@id}", :order =>'id asc')    
+    render :partial => 'city', :locals => {:cities => @cities }
   end
   
 end
